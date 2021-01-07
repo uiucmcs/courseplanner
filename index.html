@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Samiul Hoque">
+    <title>UIUC Online MCS Course Planner</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- use the latest vue-select release -->
+    <link rel="stylesheet" href="https://unpkg.com/vue-select@latest/dist/vue-select.css">
+
+    <link rel="icon" href="favicon.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="favicon-16.png" sizes="16x16" type="image/png">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/app.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-uiuc">
+            <div class="container-fluid nav-container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/images/gce.png" alt="" class="gce-img float-start">
+                            <img src="assets/images/cs-illinois.png" alt="" class="cs-img">
+                        </a>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="site-title float-end">
+                            Online MCS Courses
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Begin page content -->
+    <main id="app" class="flex-shrink-0">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="row" v-for="r in all.requirements.req">
+                        <div class="col-md-12 bottom-15">
+                            <div class="card">
+                                <h5 class="card-header">{{ r.name }}</h5>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div v-for="(cat, i) in r.categories"
+                                            v-bind:class="[r.categories.length == i+1 ? 'col-md-12':'col-md-6', 'bottom-15']">
+                                            <div class="card">
+                                                <div class="card-header" v-if="r.categories.length > 1">
+                                                    {{ cat.name }}
+                                                    <span class="badge bg-success" title="MCS-DS Requirement"
+                                                        v-if="cat.ds">*</span>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item" v-for="c in getCategoryCourses(cat.id)"
+                                                        v-bind:class="[selected.includes(c.id) ? 'list-group-item-success' : '', prereq.mandatory.includes(c.id) ? 'bg-mandatory' : '', prereq.optional.includes(c.id) ? 'bg-optional' : '']">
+                                                        <div class="course-details">
+                                                            <div class="course float-start">
+                                                                {{ c.code }} {{ c.name }}
+                                                            </div>
+                                                            <div class="semester float-end">
+                                                                <span class="badge" v-for="s in c.semester" v>
+                                                                    <i v-bind:title="s | capitalize"
+                                                                        v-bind:class="['fas', getSemesterIcons(s).icon]"
+                                                                        v-bind:style="{color: getSemesterIcons(s).color}"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="prerequisite float-end" v-if="c.prerequisite">
+                                                                <div class="form-check form-switch">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="flexSwitchCheckDefault"
+                                                                        @click="checkPreReq(c.id)">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="row bottom-15">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <h5 class="card-header">Calculation</h5>
+                                <div class="card-body">
+                                    <table class="table table-responsive table-bordered">
+                                        <tbody>
+                                            <tr v-for="(r, index) in all.requirements.req">
+                                                <td><strong>{{ r.name }}</strong> <small
+                                                        v-if="r.minimum_credit > 0">(Minimum {{ r.minimum_credit }}
+                                                        credits)</small> <small v-if="r.categories.length > 1">(From
+                                                        {{ r.required }} categories)</small></td>
+                                                <td class="credits" v-bind:class="calculation.categories[index].color">
+                                                    {{ calculation.categories[index].total }}</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-align-right"><strong>Total</strong></td>
+                                                <td class="credits" v-bind:class="calculation.color">
+                                                    <strong>{{ calculation.total }}</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header" id="selected-header">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <strong class="card-header-strong">Selected</strong>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <v-select :options="getSemesterOptions()"
+                                                :reduce="semester => semester.code" v-model="start.semester"></v-select>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <v-select :options="getYearOptions()" :reduce="year => year.code"
+                                                v-model="start.year"></v-select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-12 bottom-15">
+                                            <strong>Select a Course</strong>
+                                            <v-select :options="getCoursesForOptions()" :reduce="course => course.code"
+                                                v-model="selectedCourse"></v-select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 bottom-15" v-for="(r, index) in selectionBoxes">
+                                            <div class="card">
+                                                <div class="card-header"
+                                                    v-bind:style="{'background-color': getSemesterIcons(r.semester).color}">
+                                                    <span class="badge" style="color: #000000;">
+                                                        <i v-bind:title="r.semester | capitalize"
+                                                            v-bind:class="['fas', getSemesterIcons(r.semester).icon]"></i>
+                                                    </span>
+                                                    {{ r.name }}
+                                                    <button type="button" class="btn btn-primary btn-xs float-end"
+                                                        @click="addCourse(index, r.semester)">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                                                        v-for="c in r.courses">
+                                                        {{ c.code }} {{ c.name }}
+                                                        <button type="button" class="btn btn-light btn-xs float-end"
+                                                            @click="removeCourse(c.id, index)">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer py-3 bg-uiuc text-white-50" style="margin-top: 15px;">
+        <div class="container-fluid">
+            <div class="text-align-center">
+                <a href="https://github.com/uiumcs" class="gLink">&copy; UIUC MCS Community</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script src="https://unpkg.com/vue-select@latest"></script>
+    <script src="https://unpkg.com/vue-swal"></script>
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+
+</html>

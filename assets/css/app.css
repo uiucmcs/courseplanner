@@ -1,0 +1,151 @@
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+main>.container,
+main>.container-fluid {
+    padding: 60px 15px 0;
+}
+
+.bottom-15 {
+    padding-bottom: 0.3rem;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+li {
+    font-weight: 300;
+}
+
+.list-group-item,
+.card-header {
+    padding: 0.2rem 0.3rem;
+}
+
+.card-body {
+    padding: 0.3rem;
+}
+
+h5.card-header {
+    font-size: 1rem;
+}
+
+div.prerequisite div.form-check {
+    min-height: 0;
+    margin-bottom: 0;
+}
+
+.bg-optional {
+    background-color: #faefc5 !important;
+}
+
+.bg-mandatory {
+    background-color: #eafac5 !important;
+}
+
+.card-header-strong {
+    font-size: 1rem;
+    line-height: 1.1rem;
+}
+
+#selected-header .vs__dropdown-toggle {
+    font-size: 0.4rem !important;
+}
+
+.bg-uiuc {
+    background-color: #13294b !important;
+}
+
+.navbar-brand {
+    font-weight: 400;
+}
+
+.btn-xs {
+    padding: .2rem .3rem;
+    font-size: .4rem;
+    border-radius: .2rem;
+}
+
+.nav-img {
+    height: 1.25rem;
+    margin-top: -2px;
+}
+
+.gce-img {
+    height: 66px;
+    margin-top: -18px;
+    margin-bottom: -18px;
+}
+
+.cs-img {
+    height: 30px;
+    margin-top: -20px;
+    margin-bottom: -18px;
+}
+
+.site-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #fffffe;
+}
+
+.nav-bar {
+    height: 1.25rem;
+    margin-top: -2px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    font-weight: 200;
+}
+
+td.credits {
+    width: 120px;
+    text-align: right;
+}
+
+.course-details {
+    display: inline;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.calc-color-ok {
+    color: #08872c !important;
+    background-color: #a2fabb !important;
+    font-weight: 700;
+}
+
+.calc-color-notok {
+    color: #ff4d00 !important;
+    background-color: #fccfbb !important;
+    font-weight: 700;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.nav-container {
+    display: inline !important;
+}
+
+a.gLink {
+    color: #fffffe;
+    text-decoration: none;
+}
+
+a.gLink:hover {
+    color: #FF552E;
+}
