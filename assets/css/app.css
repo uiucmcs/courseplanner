@@ -51,13 +51,12 @@ div.prerequisite div.form-check {
 }
 
 .card-header-strong {
-    font-size: 1rem;
-    line-height: 1.1rem;
+    font-size: 1.25rem;
 }
 
-#selected-header .vs__dropdown-toggle {
+/* #selected-header .vs__dropdown-toggle {
     font-size: 0.4rem !important;
-}
+} */
 
 .bg-uiuc {
     background-color: #13294b !important;
