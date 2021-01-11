@@ -105,7 +105,16 @@
             "category": [
                 "brd-1",
                 "adv-1"
-            ]
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "aml"
+                    ]
+                }
+            }
         },
         {
             "id": "tis",
@@ -329,7 +338,16 @@
             ],
             "category": [
                 "adv-1"
-            ]
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "mas"
+                    ]
+                }
+            }
         },
         {
             "id": "ccc",

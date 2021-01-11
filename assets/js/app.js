@@ -4,11 +4,13 @@ var course_data = {
             "required": 8,
             "minimum_credit": 32
         },
-        "req": [{
+        "req": [
+            {
                 "name": "Breadth Requirements",
                 "required": 4,
                 "minimum_credit": 16,
-                "categories": [{
+                "categories": [
+                    {
                         "id": "brd-1",
                         "name": "Artificial Intelligence",
                         "ds": true
@@ -49,23 +51,28 @@ var course_data = {
                 "name": "Advanced Coursework",
                 "required": 1,
                 "minimum_credit": 12,
-                "categories": [{
-                    "id": "adv-1",
-                    "name": "Advanced Coursework"
-                }]
+                "categories": [
+                    {
+                        "id": "adv-1",
+                        "name": "Advanced Coursework"
+                    }
+                ]
             },
             {
                 "name": "Additional Coursework",
                 "required": 0,
                 "minimum_credit": 0,
-                "categories": [{
-                    "id": "add-1",
-                    "name": "Additional Coursework"
-                }]
+                "categories": [
+                    {
+                        "id": "add-1",
+                        "name": "Additional Coursework"
+                    }
+                ]
             }
         ]
     },
-    "courses": [{
+    "courses": [
+        {
             "id": "aml",
             "code": "CS 498",
             "name": "Applied Machine Learning",
@@ -98,7 +105,16 @@ var course_data = {
             "category": [
                 "brd-1",
                 "adv-1"
-            ]
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "aml"
+                    ]
+                }
+            }
         },
         {
             "id": "tis",
@@ -322,7 +338,16 @@ var course_data = {
             ],
             "category": [
                 "adv-1"
-            ]
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "mas"
+                    ]
+                }
+            }
         },
         {
             "id": "ccc",
