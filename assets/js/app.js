@@ -77,6 +77,7 @@ var course_data = {
             "code": "CS 498",
             "name": "Applied Machine Learning",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
@@ -93,6 +94,17 @@ var course_data = {
             "category": [
                 "brd-1",
                 "brd-3"
+            ]
+        },
+        {
+            "id": "nlp",
+            "code": "CS 447",
+            "name": "Natural Language Processing",
+            "semester": [
+                "fall"
+            ],
+            "category": [
+                "brd-1"
             ]
         },
         {
