@@ -74,7 +74,7 @@ var course_data = {
     "courses": [
         {
             "id": "aml",
-            "code": "CS 498",
+            "code": "CS 441",
             "name": "Applied Machine Learning",
             "semester": [
                 "fall",
@@ -166,6 +166,7 @@ var course_data = {
             "code": "CS 418",
             "name": "Interactive Computer Graphics",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
@@ -273,7 +274,7 @@ var course_data = {
         },
         {
             "id": "cnt",
-            "code": "CS 498",
+            "code": "CS 435",
             "name": "Cloud Networking",
             "semester": [
                 "fall"
@@ -284,9 +285,10 @@ var course_data = {
         },
         {
             "id": "iot",
-            "code": "CS 498",
+            "code": "CS 437",
             "name": "Internet of Things",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
