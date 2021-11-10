@@ -483,18 +483,32 @@ var app = new Vue({
             // calculate
             var all_condition = []
             for (var i = 0; i < this.selected.length; i++) {
-                var c = this.getCategoryForACourse(this.selected[i])
-                calc.total += this.perCredit
-                calc.categories[c.parent].total += this.perCredit
-                if (!required[c.parent].categories.includes(c.id)) {
-                    required[c.parent].categories.push(c.id)
+                var cs = this.getCategoryForACourse(this.selected[i])
+                parent = cs[0].parent
+                var updParentTotal = true
+                if (cs.length > 1) {
+                    parent = cs[1].parent
+                    if (calc.categories[parent].total >= this.all.requirements.req[parent].minimum_credit) {
+                        calc.categories[cs[0].parent].total += this.perCredit
+                        updParentTotal = false
+                    }
                 }
-                if (required[c.parent].categories.length >= this.all.requirements.req[c.parent].required && calc.categories[c.parent].total >= this.all.requirements.req[c.parent].minimum_credit) {
-                    calc.categories[c.parent].color = color.ok
-                    all_condition[c.parent] = true
-                } else {
-                    calc.categories[c.parent].color = color.notok
-                    all_condition[c.parent] = false
+                calc.total += this.perCredit
+                if (updParentTotal) {
+                    calc.categories[parent].total += this.perCredit
+                }
+
+                for (c of cs) {
+                    if (!required[c.parent].categories.includes(c.id)) {
+                        required[c.parent].categories.push(c.id)
+                    }
+                    if (required[c.parent].categories.length >= this.all.requirements.req[c.parent].required && calc.categories[c.parent].total >= this.all.requirements.req[c.parent].minimum_credit) {
+                        calc.categories[c.parent].color = color.ok
+                        all_condition[c.parent] = true
+                    } else {
+                        calc.categories[c.parent].color = color.notok
+                        all_condition[c.parent] = false
+                    }
                 }
             }
 
@@ -536,7 +550,7 @@ var app = new Vue({
             }
         },
         getCategoryForACourse(id) {
-            var cat = {}
+            var cats = []
             var c = this.getCourse(id)
             for (var i = 0; i < this.categories.length; i++) {
                 if (c.category.includes(this.categories[i].id)) {
@@ -544,9 +558,10 @@ var app = new Vue({
                         "id": this.categories[i].id,
                         "parent": this.categories[i].type
                     }
+                    cats.push(cat)
                 }
             }
-            return cat
+            return cats
         },
         getCategoryCourses(id) {
             return this.all.courses.filter(course => {
@@ -644,7 +659,7 @@ var app = new Vue({
             var year = this.start.year
             this.selectionBoxes.splice(0, this.selectionBoxes.length)
             for (var i = 0; i < this.totalBoxes; i++, index++) {
-                if (index % 3 == 0) {
+                if (index != 0 && index % 3 == 0) {
                     year++
                 }
                 var sem = sems[index % 3]
