@@ -74,7 +74,7 @@
     "courses": [
         {
             "id": "aml",
-            "code": "CS 498",
+            "code": "CS 441",
             "name": "Applied Machine Learning",
             "semester": [
                 "spring"
@@ -162,7 +162,7 @@
         },
         {
             "id": "dvz",
-            "code": "CS 498",
+            "code": "CS 416",
             "name": "Data Visualization",
             "semester": [
                 "summer"
