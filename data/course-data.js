@@ -77,6 +77,7 @@ const courseData = {
             "code": "CS 441",
             "name": "Applied Machine Learning",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
@@ -93,6 +94,17 @@ const courseData = {
             "category": [
                 "brd-1",
                 "brd-3"
+            ]
+        },
+        {
+            "id": "nlp",
+            "code": "CS 447",
+            "name": "Natural Language Processing",
+            "semester": [
+                "fall"
+            ],
+            "category": [
+                "brd-1"
             ]
         },
         {
@@ -154,6 +166,7 @@ const courseData = {
             "code": "CS 418",
             "name": "Interactive Computer Graphics",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
@@ -162,7 +175,7 @@ const courseData = {
         },
         {
             "id": "dvz",
-            "code": "CS 416",
+            "code": "CS 498",
             "name": "Data Visualization",
             "semester": [
                 "summer"
@@ -261,7 +274,7 @@ const courseData = {
         },
         {
             "id": "cnt",
-            "code": "CS 498",
+            "code": "CS 435",
             "name": "Cloud Networking",
             "semester": [
                 "fall"
@@ -275,6 +288,7 @@ const courseData = {
             "code": "CS 437",
             "name": "Internet of Things",
             "semester": [
+                "fall",
                 "spring"
             ],
             "category": [
@@ -406,4 +420,4 @@ const courseData = {
             ]
         }
     ]
-}
+};
