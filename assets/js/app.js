@@ -283,8 +283,8 @@ var app = new Vue({
                 var c = this.getCourse(this.selectedCourse)
                 // check semester availability
                 if (!c.semester.includes(sem)) {
-                    var text = c.code + " " + c.name + " is usually not offerred in the " + sem +
-                        " semester. Generally offerred in " + c.semester.join(", ") + " semester(s)."
+                    var text = c.code + " " + c.name + " is usually not offered in the " + sem +
+                        " semester. Generally offered in " + c.semester.join(", ") + " semester(s)."
                     this.$swal("Unavailable", text, "warning")
                     return
                 }
