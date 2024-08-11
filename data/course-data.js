@@ -1,4 +1,4 @@
-{
+const courseData = {
     "requirements": {
         "total": {
             "required": 8,
