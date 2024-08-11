@@ -438,13 +438,14 @@ var app = new Vue({
             on: false
         },
         start: {
-            semester: "fall",
-            year: 2021
+            semester: null,
+            year: new Date().getFullYear()
         },
         selectedCourse: "",
         selectionBoxes: []
     },
     created() {
+        this.start.semester = this.getCurrentSemester()
         this.getCoursesForOptions()
         this.getSelectionBoxes()
         this.getCategories()
@@ -606,24 +607,34 @@ var app = new Vue({
             }
             return c
         },
+        getCurrentSemester() {
+            const month = new Date().getMonth()
+            if (month <= 3) {
+                return "spring"
+            } else if (month <= 6) {
+                return "summer"
+            } else {
+                return "fall"
+            }
+        },
         getSemesterOptions() {
             return [{
-                    "label": "Fall",
-                    "code": "fall"
-                },
-                {
                     "label": "Spring",
                     "code": "spring"
                 },
                 {
                     "label": "Summer",
                     "code": "summer"
+                },
+                {
+                    "label": "Fall",
+                    "code": "fall"
                 }
             ]
         },
         getYearOptions() {
             var c = []
-            for (var i = 2011; i < 2022; i++) {
+            for (var i = this.start.year - 5; i <= this.start.year + 1; i++) {
                 var ob = {
                     "label": i.toString(),
                     "code": i
