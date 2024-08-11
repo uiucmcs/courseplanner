@@ -95,6 +95,29 @@ const courseData = {
             ]
         },
         {
+            "id": "dvz",
+            "code": "CS 416",
+            "name": "Data Visualization",
+            "semester": [
+                "summer"
+            ],
+            "category": [
+                "brd-3"
+            ]
+        },
+        {
+            "id": "icg",
+            "code": "CS 418",
+            "name": "Interactive Computer Graphics",
+            "semester": [
+                "fall",
+                "spring"
+            ],
+            "category": [
+                "brd-3"
+            ]
+        },
+        {
             "id": "cph",
             "code": "CS 445",
             "name": "Computational Photography",
@@ -116,27 +139,6 @@ const courseData = {
             "category": [
                 "brd-1"
             ]
-        },
-        {
-            "id": "dlh",
-            "code": "CS 598",
-            "name": "Deep Learning for Healthcare",
-            "semester": [
-                "spring"
-            ],
-            "category": [
-                "brd-1",
-                "adv-1"
-            ],
-            "prerequisite": {
-                "minimum": 0,
-                "courses": {
-                    "mandatory": [],
-                    "optional": [
-                        "aml"
-                    ]
-                }
-            }
         },
         {
             "id": "tis",
@@ -170,51 +172,6 @@ const courseData = {
             "category": [
                 "brd-2"
             ]
-        },
-        {
-            "id": "icg",
-            "code": "CS 418",
-            "name": "Interactive Computer Graphics",
-            "semester": [
-                "fall",
-                "spring"
-            ],
-            "category": [
-                "brd-3"
-            ]
-        },
-        {
-            "id": "dvz",
-            "code": "CS 416",
-            "name": "Data Visualization",
-            "semester": [
-                "summer"
-            ],
-            "category": [
-                "brd-3"
-            ]
-        },
-        {
-            "id": "svz",
-            "code": "CS 519",
-            "name": "Scientific Visualization",
-            "semester": [
-                "summer"
-            ],
-            "category": [
-                "brd-3",
-                "adv-1"
-            ],
-            "prerequisite": {
-                "minimum": 0,
-                "courses": {
-                    "mandatory": [],
-                    "optional": [
-                        "icg",
-                        "dvz"
-                    ]
-                }
-            }
         },
         {
             "id": "prp",
@@ -284,17 +241,6 @@ const courseData = {
             ]
         },
         {
-            "id": "cca",
-            "code": "CS 498",
-            "name": "Cloud Computing Applications",
-            "semester": [
-                "spring"
-            ],
-            "category": [
-                "brd-7"
-            ]
-        },
-        {
             "id": "cnt",
             "code": "CS 435",
             "name": "Cloud Networking",
@@ -311,6 +257,17 @@ const courseData = {
             "name": "Internet of Things",
             "semester": [
                 "fall",
+                "spring"
+            ],
+            "category": [
+                "brd-7"
+            ]
+        },
+        {
+            "id": "cca",
+            "code": "CS 498",
+            "name": "Cloud Computing Applications",
+            "semester": [
                 "spring"
             ],
             "category": [
@@ -340,15 +297,46 @@ const courseData = {
             ]
         },
         {
-            "id": "fdc",
-            "code": "CS 598",
-            "name": "Foundations of Data Curation",
+            "id": "svz",
+            "code": "CS 519",
+            "name": "Scientific Visualization",
             "semester": [
-                "fall"
+                "summer"
+            ],
+            "category": [
+                "brd-3",
+                "adv-1"
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "icg",
+                        "dvz"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "adm",
+            "code": "CS 598",
+            "name": "Advanced Bayesian Modeling",
+            "semester": [
+                "spring"
             ],
             "category": [
                 "adv-1"
-            ]
+            ],
+            "prerequisite": {
+                "minimum": 0,
+                "courses": {
+                    "mandatory": [],
+                    "optional": [
+                        "mas"
+                    ]
+                }
+            }
         },
         {
             "id": "psl",
@@ -376,13 +364,14 @@ const courseData = {
             }
         },
         {
-            "id": "adm",
+            "id": "dlh",
             "code": "CS 598",
-            "name": "Advanced Bayesian Modeling",
+            "name": "Deep Learning for Healthcare",
             "semester": [
                 "spring"
             ],
             "category": [
+                "brd-1",
                 "adv-1"
             ],
             "prerequisite": {
@@ -390,8 +379,40 @@ const courseData = {
                 "courses": {
                     "mandatory": [],
                     "optional": [
-                        "mas"
+                        "aml"
                     ]
+                }
+            }
+        },
+        {
+            "id": "fdc",
+            "code": "CS 598",
+            "name": "Foundations of Data Curation",
+            "semester": [
+                "fall"
+            ],
+            "category": [
+                "adv-1"
+            ]
+        },
+        {
+            "id": "dmc",
+            "code": "CS 598",
+            "name": "Data Mining Capstone",
+            "semester": [
+                "summer"
+            ],
+            "category": [
+                "adv-1"
+            ],
+            "prerequisite": {
+                "minimum": 2,
+                "courses": {
+                    "mandatory": [
+                        "tis",
+                        "idm"
+                    ],
+                    "optional": []
                 }
             }
         },
@@ -416,27 +437,6 @@ const courseData = {
                         "cnt",
                         "iot"
                     ]
-                }
-            }
-        },
-        {
-            "id": "dmc",
-            "code": "CS 598",
-            "name": "Data Mining Capstone",
-            "semester": [
-                "summer"
-            ],
-            "category": [
-                "adv-1"
-            ],
-            "prerequisite": {
-                "minimum": 2,
-                "courses": {
-                    "mandatory": [
-                        "tis",
-                        "idm"
-                    ],
-                    "optional": []
                 }
             }
         },
