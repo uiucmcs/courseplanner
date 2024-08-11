@@ -36,13 +36,23 @@ const courseData = {
                         "ds": false
                     },
                     {
+                        "id": "brd-5",
+                        "name": "Programming Languages & Software Engineering",
+                        "ds": false
+                    },
+                    {
                         "id": "brd-6",
                         "name": "Scientific Computing",
                         "ds": false
                     },
                     {
-                        "id": "brd-5",
-                        "name": "Programming Languages & Software Engineering",
+                        "id": "brd-8",
+                        "name": "Security & Privacy",
+                        "ds": false
+                    },
+                    {
+                        "id": "brd-9",
+                        "name": "Theory & Algorithms",
                         "ds": false
                     }
                 ]
@@ -175,7 +185,7 @@ const courseData = {
         },
         {
             "id": "dvz",
-            "code": "CS 498",
+            "code": "CS 416",
             "name": "Data Visualization",
             "semester": [
                 "summer"
@@ -189,7 +199,7 @@ const courseData = {
             "code": "CS 519",
             "name": "Scientific Visualization",
             "semester": [
-                "fall"
+                "summer"
             ],
             "category": [
                 "brd-3",
@@ -237,6 +247,18 @@ const courseData = {
             ],
             "category": [
                 "brd-5"
+            ]
+        },
+        {
+            "id": "fmc",
+            "code": "CS 475",
+            "name": "Formal Models of Computation",
+            "semester": [
+                "fall"
+            ],
+            "category": [
+                "brd-5",
+                "brd-9"
             ]
         },
         {
@@ -296,6 +318,17 @@ const courseData = {
             ]
         },
         {
+            "id": "cse",
+            "code": "CS 463",
+            "name": "Computer Security II",
+            "semester": [
+                "spring"
+            ],
+            "category": [
+                "brd-8"
+            ]
+        },
+        {
             "id": "tpd",
             "code": "CS 513",
             "name": "Theory and Practice of Data Cleaning",
@@ -322,8 +355,7 @@ const courseData = {
             "code": "CS 598",
             "name": "Practical Statistical Learning",
             "semester": [
-                "fall",
-                "spring"
+                "fall"
             ],
             "category": [
                 "adv-1"
@@ -368,7 +400,7 @@ const courseData = {
             "code": "CS 598",
             "name": "Cloud Computing Capstone",
             "semester": [
-                "summer"
+                "fall"
             ],
             "category": [
                 "adv-1"
