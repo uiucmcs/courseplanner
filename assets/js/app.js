@@ -285,7 +285,7 @@ var app = new Vue({
                 if (!c.semester.includes(sem)) {
                     var text = c.code + " " + c.name + " is usually not offered in the " + sem +
                         " semester. Generally offered in " + c.semester.join(", ") + " semester(s)."
-                    this.$swal("Unavailable", text, "warning")
+                    Swal.fire("Unavailable", text, "warning")
                     return
                 }
                 // check pre-requisite
@@ -325,7 +325,7 @@ var app = new Vue({
                                 text += "."
                             }
                         }
-                        this.$swal("Pre-requisite not fulfilled", text, "error")
+                        Swal.fire("Pre-requisite not fulfilled", text, "error")
                         return
                     }
 
@@ -333,7 +333,7 @@ var app = new Vue({
                     var lastSem = this.checkPreReqSem(c.prerequisite.courses.mandatory, c.prerequisite.courses.optional, c.prerequisite.minimum)
                     if (index <= lastSem) {
                         var text = "You finished the last pre-requisite on the " + this.selectionBoxes[lastSem].name + " semester. You must do this course after that sesmester."
-                        this.$swal("Pre-requisite not fulfilled", text, "error")
+                        Swal.fire("Pre-requisite not fulfilled", text, "error")
                         return
                     }
                 }
