@@ -338,19 +338,24 @@ var app = new Vue({
             }
             return true
         },
-        addCourse(index, sem) {
+        async addCourse(index, sem) {
             if (this.selectedCourse && this.selectedCourse.length > 0) {
                 var c = this.getCourse(this.selectedCourse)
                 // check semester availability
                 if (!c.semester.includes(sem)) {
                     var text = c.code + " " + c.name + " is usually not offered in the " + sem +
                         " semester. Generally offered in " + c.semester.join(", ") + " semester(s)."
-                    Swal.fire({
-                        title: "Unavailable",
+                    const semText = sem.charAt(0).toUpperCase() + sem.slice(1)
+                    const alert = await Swal.fire({
+                        title: "Add to " + semText + " semester?",
                         text: text,
-                        icon: "warning"
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Add"
                     })
-                    return
+                    if (alert.isDismissed) {
+                        return
+                    }
                 }
                 // check pre-requisite
                 if (this.checkPreReq(c)) {
