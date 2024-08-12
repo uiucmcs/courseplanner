@@ -278,6 +278,58 @@ var app = new Vue({
             }
             return -1
         },
+        checkPreReq(c) {
+            if (c.prerequisite && c.prerequisite.minimum > 0) {
+                var mCount = 0,
+                    oCount = 0
+                for (var i = 0; i < this.selected.length; i++) {
+                    if (c.prerequisite.courses.mandatory.includes(this.selected[i])) {
+                        mCount++
+                    } else if (c.prerequisite.courses.optional.includes(this.selected[i])) {
+                        oCount++
+                    }
+                }
+                if (mCount < c.prerequisite.courses.mandatory.length || mCount + oCount < c.prerequisite.minimum) {
+                    var text = c.code + " " + c.name + " has pre-requisite(s)."
+                    var temp = []
+                    if (c.prerequisite.courses.mandatory.length > 0) {
+                        text += " Must complete: "
+                        for (var i = 0; i < c.prerequisite.courses.mandatory.length; i++) {
+                            var crs = this.getCourse(c.prerequisite.courses.mandatory[i])
+                            temp.push(crs.code + " " + crs.name)
+                        }
+                        if (temp.length > 0) {
+                            text += temp.join(", ")
+                            text += "."
+                            temp.splice(0, temp.length)
+                        }
+                    }
+                    if (c.prerequisite.courses.mandatory.length < c.prerequisite.minimum) {
+                        text += " Complete any " + (c.prerequisite.minimum - c.prerequisite.courses.mandatory.length) + " from: "
+                        for (var i = 0; i < c.prerequisite.courses.optional.length; i++) {
+                            var crs = this.getCourse(c.prerequisite.courses.optional[i])
+                            temp.push(crs.code + " " + crs.name)
+                        }
+                        if (temp.length > 0) {
+                            text += temp.join(", ")
+                            text += "."
+                        }
+                    }
+                    Swal.fire("Pre-requisite not fulfilled", text, "error")
+                    return false
+                }
+
+                // check pre-reqs done previously
+                var lastSem = this.checkPreReqSem(c.prerequisite.courses.mandatory, c.prerequisite.courses.optional, c.prerequisite.minimum)
+                if (index <= lastSem) {
+                    var text = "You finished the last pre-requisite on the " + this.selectionBoxes[lastSem].name + " semester. You must do this course after that sesmester."
+                    Swal.fire("Pre-requisite not fulfilled", text, "error")
+                    return false
+                }
+                return true
+            }
+            return true
+        },
         addCourse(index, sem) {
             if (this.selectedCourse && this.selectedCourse.length > 0) {
                 var c = this.getCourse(this.selectedCourse)
@@ -289,57 +341,11 @@ var app = new Vue({
                     return
                 }
                 // check pre-requisite
-                if (c.prerequisite && c.prerequisite.minimum > 0) {
-                    var mCount = 0,
-                        oCount = 0
-                    for (var i = 0; i < this.selected.length; i++) {
-                        if (c.prerequisite.courses.mandatory.includes(this.selected[i])) {
-                            mCount++
-                        } else if (c.prerequisite.courses.optional.includes(this.selected[i])) {
-                            oCount++
-                        }
-                    }
-                    if (mCount < c.prerequisite.courses.mandatory.length || mCount + oCount < c.prerequisite.minimum) {
-                        var text = c.code + " " + c.name + " has pre-requisite(s)."
-                        var temp = []
-                        if (c.prerequisite.courses.mandatory.length > 0) {
-                            text += " Must complete: "
-                            for (var i = 0; i < c.prerequisite.courses.mandatory.length; i++) {
-                                var crs = this.getCourse(c.prerequisite.courses.mandatory[i])
-                                temp.push(crs.code + " " + crs.name)
-                            }
-                            if (temp.length > 0) {
-                                text += temp.join(", ")
-                                text += "."
-                                temp.splice(0, temp.length)
-                            }
-                        }
-                        if (c.prerequisite.courses.mandatory.length < c.prerequisite.minimum) {
-                            text += " Complete any " + (c.prerequisite.minimum - c.prerequisite.courses.mandatory.length) + " from: "
-                            for (var i = 0; i < c.prerequisite.courses.optional.length; i++) {
-                                var crs = this.getCourse(c.prerequisite.courses.optional[i])
-                                temp.push(crs.code + " " + crs.name)
-                            }
-                            if (temp.length > 0) {
-                                text += temp.join(", ")
-                                text += "."
-                            }
-                        }
-                        Swal.fire("Pre-requisite not fulfilled", text, "error")
-                        return
-                    }
-
-                    // check pre-reqs done previously
-                    var lastSem = this.checkPreReqSem(c.prerequisite.courses.mandatory, c.prerequisite.courses.optional, c.prerequisite.minimum)
-                    if (index <= lastSem) {
-                        var text = "You finished the last pre-requisite on the " + this.selectionBoxes[lastSem].name + " semester. You must do this course after that sesmester."
-                        Swal.fire("Pre-requisite not fulfilled", text, "error")
-                        return
-                    }
+                if (this.checkPreReq(c)) {
+                    this.selected.push(this.selectedCourse)
+                    this.selectedCourse = ""
+                    this.selectionBoxes[index].courses.push(c)
                 }
-                this.selected.push(this.selectedCourse)
-                this.selectedCourse = ""
-                this.selectionBoxes[index].courses.push(c)
             }
         },
         removeCourse(id, sem) {
