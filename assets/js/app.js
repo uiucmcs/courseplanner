@@ -226,7 +226,7 @@ var app = new Vue({
             }
             return {}
         },
-        checkPreReq(id) {
+        showPreReq(id) {
             if (this.prereq.on) {
                 this.prereq.on = false
                 this.prereq.mandatory.splice(0, this.prereq.mandatory.length)
@@ -278,7 +278,7 @@ var app = new Vue({
             }
             return -1
         },
-        checkPreReq(c) {
+        checkPreReq(index, c) {
             if (c.prerequisite && c.prerequisite.minimum > 0) {
                 var mCount = 0,
                     oCount = 0
@@ -358,7 +358,7 @@ var app = new Vue({
                     }
                 }
                 // check pre-requisite
-                if (this.checkPreReq(c)) {
+                if (this.checkPreReq(index, c)) {
                     this.selected.push(this.selectedCourse)
                     this.selectedCourse = ""
                     this.selectionBoxes[index].courses.push(c)
