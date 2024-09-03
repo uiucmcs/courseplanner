@@ -108,7 +108,7 @@
                                                                 <div class="form-check form-switch">
                                                                     <input class="form-check-input" type="checkbox"
                                                                         id="flexSwitchCheckDefault"
-                                                                        @click="checkPreReq(c.id)">
+                                                                        @click="showPreReq(c.id)">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -246,8 +246,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <script src="https://unpkg.com/vue-select@latest"></script>
-    <script src="https://unpkg.com/vue-swal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="data/course-data.js"></script>
     <script src="assets/js/app.js"></script>
 
 </body>
